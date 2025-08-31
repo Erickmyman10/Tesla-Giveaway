@@ -362,3 +362,41 @@ dialog { border: 0; border-radius: 18px; padding: 0; background: transparent; }
     $$('.card').forEach(card => card.addEventListener('click', (e)=> confettiBurst(e.clientX, e.clientY)));
   </script></body>
       </html>
+<!-- Contact Form Section -->
+<h2 style="color:#e82127; font-family:Arial, sans-serif; margin-top:30px;">
+  🚗 Contact Us
+</h2>
+
+<form id="contact-form" style="max-width:400px; margin:auto; display:flex; flex-direction:column; gap:10px;">
+  <input type="email" name="user_email" placeholder="Enter your email"
+    style="padding:10px; border:2px solid #e82127; border-radius:8px;" required>
+
+  <textarea name="message" placeholder="Type your message here..."
+    style="padding:10px; border:2px solid #e82127; border-radius:8px; height:100px;" required></textarea>
+
+  <button type="submit"
+    style="background-color:#e82127; color:white; padding:12px; border:none; border-radius:8px; cursor:pointer; font-weight:bold;">
+    Send Receipt
+  </button>
+</form>
+
+<p id="status" style="text-align:center; margin-top:10px; font-weight:bold;"></p>
+
+<!-- EmailJS SDK -->
+<script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+<script>
+  (function(){
+    emailjs.init("cwU5Vf3E6fnGiG9N5"); // ✅ Your Public Key
+  })();
+
+  document.getElementById("contact-form").addEventListener("submit", function(event) {
+    event.preventDefault();
+
+    emailjs.sendForm("service_77a51e5", "template_by9uf3w", this) // ✅ Your Service & Template
+      .then(function() {
+        document.getElementById("status").innerText = "✅ Receipt sent to your email!";
+      }, function(error) {
+        document.getElementById("status").innerText = "❌ Failed: " + error.text;
+      });
+  });
+</script>
